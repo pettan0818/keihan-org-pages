@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcara=self.webpackChunkcara||[]).push([[137],{9342:function(e,t,l){l.r(t);var n=l(1144),a=new Date;console.log(a),console.log(a.getDate()),console.log(a.getMonth());var o=n.createElement("div",null,n.createElement("h1",null,"一般社団法人京阪マーケティング・リサーチ機構 公告事項"),a.getFullYear(),"/",a.getMonth()+1,"/",a.getDate(),"時点において、該当事項はございません。");t.default=function(){return o}}}]);
+//# sourceMappingURL=component---src-pages-koukoku-js-3eba1c72250a0853a6f5.js.map
