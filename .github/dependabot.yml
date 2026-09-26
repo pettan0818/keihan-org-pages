@@ -1,0 +1,22 @@
+# Dependency update PRs. Every PR runs build + npm run verify (deploy.yml);
+# merge once CI is green. Minor/patch updates are grouped into one PR per ecosystem.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+      timezone: Asia/Tokyo
+    open-pull-requests-limit: 5
+    groups:
+      npm-minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+      timezone: Asia/Tokyo
+    groups:
+      actions:
+        patterns: ['*']

@@ -61,6 +61,10 @@ npm run verify -- https://www.keihan.or.jp   # 本番を JS 非実行で検査
 
 リポジトリ設定の **Settings → Pages → Build and deployment → Source** は「GitHub Actions」にしておく必要があります。
 
+### 依存関係の更新
+
+Dependabot（`.github/dependabot.yml`）が、月に 1 回、Astro などの npm パッケージと GitHub Actions の更新 PR を作ります。PR でもビルドと `npm run verify` が走るので、CI が緑なら中身を確認してマージしてください。マイナー・パッチ更新は 1 本の PR にまとまります。メジャー更新は個別の PR になるので、プレビューで表示を確認してからマージしてください。
+
 ## 旧サイトからの移行メモ
 
 - 旧サイトは Gatsby（LekoArts cara テーマ）で、ソースは `pettan0818/keihan-org-LP`、ビルド成果物をこのリポジトリの main に直接 push していました。
