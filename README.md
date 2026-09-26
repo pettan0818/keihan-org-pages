@@ -45,6 +45,7 @@ npm run dev       # 開発サーバー http://localhost:4321
 npm run build     # dist/ に静的サイトを生成
 npm run verify    # dist/ に対して受け入れ条件を検査
 npm run verify -- https://www.keihan.or.jp   # 本番を JS 非実行で検査
+npm run images    # ロゴから OGP 画像とタッチアイコンを再生成（法人名を変えたとき）
 ```
 
 `npm run verify` では次の項目を検査します。
