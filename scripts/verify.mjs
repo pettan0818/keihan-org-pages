@@ -26,7 +26,7 @@ function check(ok, label) {
 
 // 2. Readable without JS: English mission and the latest three DOIs on the top pages, every DOI on the research pages.
 const mission =
-  'Keihan Marketing Research Association (KMA) is an independent, not-for-profit research institute established in Kyoto, Japan, in 2022. KMA supports independent researchers and publishes peer-reviewed research on markets, consumers, and public policy, making all results freely available to the public.';
+  'Keihan Marketing Association (KMA) is an independent, not-for-profit research institute established in Kyoto, Japan, in 2022. KMA supports independent researchers and publishes peer-reviewed research on markets, consumers, and public policy, making all results freely available to the public.';
 // Each paper in research.yaml starts with "- id:"; take its doi and date.
 const papers = (await readFile('src/content/research.yaml', 'utf-8'))
   .split(/^- id:/m)

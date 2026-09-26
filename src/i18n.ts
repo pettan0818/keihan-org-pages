@@ -33,14 +33,15 @@ export const ui = {
       '京阪マーケティング・リサーチ機構は、2022年に京都で設立された独立の非営利研究機関です。市場・消費者・公共政策に関する研究に取り組む研究者を支援し、その成果である査読付き論文を、誰もが無料で読める形で公開しています。',
   },
   en: {
-    orgName: 'Keihan Marketing Research Association',
-    orgShortName: 'Keihan Marketing Research Association',
+    // English name as written in the articles of association (定款第1条). OGP image: npm run images.
+    orgName: 'Keihan Marketing Association',
+    orgShortName: 'Keihan Marketing Association',
     nav: { home: 'Home', research: 'Research', about: 'About' },
     langSwitch: '日本語',
     koukoku: 'Public notices (Japanese)',
     contact: 'Contact',
     skipToContent: 'Skip to content',
     mission:
-      'Keihan Marketing Research Association (KMA) is an independent, not-for-profit research institute established in Kyoto, Japan, in 2022. KMA supports independent researchers and publishes peer-reviewed research on markets, consumers, and public policy, making all results freely available to the public.',
+      'Keihan Marketing Association (KMA) is an independent, not-for-profit research institute established in Kyoto, Japan, in 2022. KMA supports independent researchers and publishes peer-reviewed research on markets, consumers, and public policy, making all results freely available to the public.',
   },
 } as const;
