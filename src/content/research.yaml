@@ -4,6 +4,22 @@
 # - doi: "10.xxxx/..." の形で書く（https://doi.org/ は付けない）
 # - title_en_translated: 公式英題がなく title_en が当方の英訳のときだけ true（英語ページで [ ] 付きになり、日本語ページには英題を出さない）
 
+- id: kataoka-2026-keizaironso-199
+  authors_ja: 片岡 亮
+  authors_en: Kataoka, R.
+  year: 2026
+  date: 2026-01-30
+  title_ja: 不動産業界における物件提案の精度向上に関する考察―WEBサイト上での新たな提案手法の構築―
+  title_en: "A Study on Improving the Accuracy of Property Proposals in the Real Estate Industry: Constructing a New Proposal Method on Websites"
+  title_en_translated: true
+  journal_ja: 経済論叢
+  journal_en: The Kyoto Economic Review
+  volume: "199"
+  pages: "1–14"
+  doi: 10.57475/keizaironso.199.1.1
+  type_ja: 査読付き論文
+  type_en: Peer-reviewed paper
+
 - id: kirino-2023-apdmj-20-1
   authors_ja: 桐野 裕之
   authors_en: Kirino, H.
