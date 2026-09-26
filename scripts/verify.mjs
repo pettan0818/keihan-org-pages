@@ -33,7 +33,7 @@ const papers = (await readFile('src/content/research.yaml', 'utf-8'))
   .slice(1)
   .map((block) => ({ doi: block.match(/^\s*doi:\s*(\S+)/m)?.[1], date: block.match(/^\s*date:\s*(\S+)/m)?.[1] }));
 check(papers.length > 0 && papers.every((p) => p.doi && p.date), 'research.yaml: every paper has doi and date');
-const latest = [...papers].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
+const latest = [...papers].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '')).slice(0, 3);
 const en = await get('/en/');
 check(en?.includes(mission), '/en/ contains the English mission statement');
 for (const { doi } of latest) {
