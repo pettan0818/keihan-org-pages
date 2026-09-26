@@ -65,4 +65,4 @@ npm run verify -- https://www.keihan.or.jp   # 本番を JS 非実行で検査
 
 - 旧サイトは Gatsby（LekoArts cara テーマ）で、ソースは `pettan0818/keihan-org-LP`、ビルド成果物をこのリポジトリの main に直接 push していました。
 - ハッシュ付き JS チャンク、`page-data/*.json` などの Gatsby 内部ファイルは移行していません。
-- `banner.jpg`、`apple-touch-icon*.png`、`android-chrome-*.png` はテーマのサンプル画像だったため、同じパスのまま KMA の画像に差し替えました。
+- `banner.jpg`、`apple-touch-icon*.png`、`android-chrome-*.png` はテーマのサンプル画像だったため、同じパスのまま KMA のロゴ（`logo_original.png`）から作り直しました。ロゴの文字は白で暗い背景用のため、ヘッダーは旧サイトの背景色 `#141821` の帯にしています。
