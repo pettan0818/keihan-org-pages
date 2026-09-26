@@ -6,12 +6,16 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "verify": "node scripts/verify.mjs"
+    "verify": "node scripts/verify.mjs",
+    "images": "node --experimental-strip-types scripts/generate-images.mjs"
   },
   "dependencies": {
     "astro": "^7.3.5"
   },
   "engines": {
     "node": ">=22.12.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.4"
   }
 }
