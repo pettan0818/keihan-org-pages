@@ -24,13 +24,27 @@ function check(ok, label) {
   if (!ok) failures++;
 }
 
-// 2. English top page readable without JS: mission + every DOI.
+// 2. Readable without JS: English mission and the latest three DOIs on the top pages, every DOI on the research pages.
 const mission =
   'Keihan Marketing Research Association (KMA) is an independent, not-for-profit research institute established in Kyoto, Japan, in 2022. KMA supports independent researchers and publishes peer-reviewed research on markets, consumers, and public policy, making all results freely available to the public.';
-const dois = [...(await readFile('src/content/research.yaml', 'utf-8')).matchAll(/^\s*doi:\s*(\S+)/gm)].map((m) => m[1]);
+// Each paper in research.yaml starts with "- id:"; take its doi and date.
+const papers = (await readFile('src/content/research.yaml', 'utf-8'))
+  .split(/^- id:/m)
+  .slice(1)
+  .map((block) => ({ doi: block.match(/^\s*doi:\s*(\S+)/m)?.[1], date: block.match(/^\s*date:\s*(\S+)/m)?.[1] }));
+check(papers.length > 0 && papers.every((p) => p.doi && p.date), 'research.yaml: every paper has doi and date');
+const latest = [...papers].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
 const en = await get('/en/');
 check(en?.includes(mission), '/en/ contains the English mission statement');
-for (const doi of dois.slice(0, 3)) check(en?.includes(doi), `/en/ contains DOI ${doi}`);
+for (const { doi } of latest) {
+  check(en?.includes(doi), `/en/ contains latest DOI ${doi}`);
+  check((await get('/'))?.includes(doi), `/ contains latest DOI ${doi}`);
+}
+// Research pages list every paper.
+for (const page of ['/research/', '/en/research/']) {
+  const html = await get(page);
+  for (const { doi } of papers) check(html?.includes(doi), `${page} contains DOI ${doi}`);
+}
 
 // 3. Public notice at the same path, same wording.
 const koukoku = await get('/koukoku/');
