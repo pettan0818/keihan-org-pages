@@ -54,16 +54,15 @@ const navKeys: RouteKey[] = ['home', 'research', 'about'];
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#141821" />
     <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main">{t.skipToContent}</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="wordmark" href={routes.home[lang]}>
-          <span class="wordmark-abbr" aria-hidden="true">KMA</span>
-          <span class="wordmark-name">{t.orgName}</span>
+        <a class="logo-link" href={routes.home[lang]}>
+          <img class="logo" src="/logo_original.png" alt={t.orgName} width="990" height="162" />
         </a>
         <nav class="site-nav" aria-label={lang === 'ja' ? 'サイト内' : 'Site'}>
           <ul>
