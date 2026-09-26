@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import PaperList from '../../components/PaperList.astro';
+import { getPapers } from '../../lib/content';
+import { ui } from '../../i18n';
+
+const papers = await getPapers();
+---
+
+<Base
+  lang="ja"
+  route="research"
+  title={`研究成果 | ${ui.ja.orgName}`}
+  description="京阪マーケティング・リサーチ機構の研究成果（査読付き論文・研究ノート）の一覧です。著者、掲載誌、巻号・頁、DOI を掲載しています。"
+>
+  <h1>研究成果</h1>
+  <p class="lead">
+    当機構が支援する研究者による査読付き論文・研究ノートの一覧です。各論文は DOI のリンクから掲載誌のページで読むことができます。
+  </p>
+  <PaperList papers={papers} lang="ja" />
+</Base>
