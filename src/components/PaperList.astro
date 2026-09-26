@@ -36,11 +36,11 @@ const labels =
             <p class="paper-cite">
               {lang === 'ja' ? (
                 <>
-                  {p.authors_ja}（{p.year}）{p.journal_ja}, {p.volume}, pp. {p.pages}. {p.type_ja}.
+                  {p.authors_ja}（{p.year}）{p.journal_ja}, {p.volume}, <span class="nowrap">pp. {p.pages}</span>. {p.type_ja}.
                 </>
               ) : (
                 <>
-                  {p.authors_en} ({p.year}). <cite>{p.journal_en}</cite>, {p.volume}, pp. {p.pages}. {p.type_en}.
+                  {p.authors_en} ({p.year}). <cite>{p.journal_en}</cite>, {p.volume}, <span class="nowrap">pp. {p.pages}</span>. {p.type_en}.
                 </>
               )}
               <br />
@@ -66,7 +66,7 @@ const labels =
             </dd>
             <dt>{labels.volume}</dt>
             <dd>
-              {p.volume}, pp. {p.pages}
+              {p.volume}, <span class="nowrap">pp. {p.pages}</span>
             </dd>
             <dt>{labels.type}</dt>
             <dd>{lang === 'ja' ? p.type_ja : p.type_en}</dd>
@@ -133,6 +133,10 @@ const labels =
     font-size: 0.925rem;
     line-height: 1.7;
     margin: 0;
+  }
+
+  .nowrap {
+    white-space: nowrap;
   }
 
   cite {
