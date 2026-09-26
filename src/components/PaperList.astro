@@ -24,12 +24,15 @@ const labels =
     papers.map(({ data: p }) => (
       <li class="paper">
         <article>
-          <Heading class="paper-title">{lang === 'ja' ? p.title_ja : p.title_en}</Heading>
+          <Heading class="paper-title">
+            {lang === 'ja' ? p.title_ja : p.title_en_translated ? `[${p.title_en}]` : p.title_en}
+          </Heading>
           {lang === 'ja' ? (
-            <p class="paper-title-alt" lang="en">{p.title_en}</p>
+            !p.title_en_translated && <p class="paper-title-alt" lang="en">{p.title_en}</p>
           ) : (
             <p class="paper-title-alt">
-              Original title: <span lang="ja">{p.title_ja}</span>
+              {p.title_en_translated ? 'Original Japanese title (no official English title): ' : 'Original title: '}
+              <span lang="ja">{p.title_ja}</span>
             </p>
           )}
           {compact ? (

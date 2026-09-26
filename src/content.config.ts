@@ -12,6 +12,8 @@ const research = defineCollection({
     date: z.coerce.date(),
     title_ja: z.string(),
     title_en: z.string(),
+    /** true when the journal has no official English title and title_en is our translation. */
+    title_en_translated: z.boolean().default(false),
     journal_ja: z.string(),
     journal_en: z.string(),
     volume: z.string(),

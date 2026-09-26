@@ -2,6 +2,7 @@
 # - id: 重複しない英数字の識別子（URL には出ない）
 # - 表示順: date（掲載日、J-STAGE の公開日など）の新しい順。トップには新しい3件が出る。
 # - doi: "10.xxxx/..." の形で書く（https://doi.org/ は付けない）
+# - title_en_translated: 公式英題がなく title_en が当方の英訳のときだけ true（英語ページで [ ] 付きになり、日本語ページには英題を出さない）
 
 - id: kirino-2023-apdmj-20-1
   authors_ja: 桐野 裕之
