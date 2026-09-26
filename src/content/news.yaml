@@ -1,0 +1,16 @@
+# News の一覧。追加するときはこのファイルに1件追記するだけでよい。
+# - id: 重複しない英数字の識別子（URL には出ない）
+# - date: YYYY-MM-DD。新しい順に自動で並ぶ。
+# - url: 関連リンク（任意）
+
+- id: 2023-07-jpi-paper
+  date: 2023-07-01
+  title_ja: 代表理事 桐野が石油学会誌にて査読付き学術論文を発表しました。
+  title_en: Representative Director H. Kirino published a peer-reviewed paper in the Journal of the Japan Petroleum Institute.
+  url: https://doi.org/10.1627/jpi.66.109
+
+- id: 2022-12-apdmj-note
+  date: 2022-12-15
+  title_ja: 代表理事 桐野が商品開発・管理研究誌にて査読付き研究ノートを発表しました。
+  title_en: Representative Director H. Kirino published a peer-reviewed research note in the Journal of Product Development and Management.
+  url: https://doi.org/10.57471/apdmj.19.1_2

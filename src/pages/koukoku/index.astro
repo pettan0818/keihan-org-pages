@@ -1,0 +1,31 @@
+---
+// 電子公告のページ。URL (/koukoku/) は登記事項の可能性があるため変更しないこと。
+// 本文は旧サイト (Gatsby, src/pages/koukoku.js) と一字一句同じ。旧サイト同様、日付は閲覧時点の日付を表示する:
+// 静的 HTML にはビルド日 (JST) を入れ、インライン JS で閲覧日に置き換える。
+import Base from '../../layouts/Base.astro';
+import { jaOnlyRoutes, ui } from '../../i18n';
+
+const buildDate = new Intl.DateTimeFormat('ja-JP', {
+  timeZone: 'Asia/Tokyo',
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric',
+}).format(new Date());
+---
+
+<Base
+  lang="ja"
+  path={jaOnlyRoutes.koukoku}
+  title={`公告 | ${ui.ja.orgName}`}
+  description={`${ui.ja.orgName}の公告ページです。`}
+>
+  <h1>一般社団法人京阪マーケティング・リサーチ機構 公告事項</h1>
+  <p><span id="koukoku-date">{buildDate}</span>時点において、該当事項はございません。</p>
+  <script is:inline>
+    (function () {
+      var el = document.getElementById('koukoku-date');
+      var d = new Date();
+      if (el) el.textContent = d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate();
+    })();
+  </script>
+</Base>

@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { routes, ui } from '../i18n';
+---
+
+<Base
+  lang="ja"
+  path="/404.html"
+  title={`ページが見つかりません | ${ui.ja.orgName}`}
+  description="お探しのページは見つかりませんでした。"
+>
+  <meta slot="head" name="robots" content="noindex" />
+  <h1>ページが見つかりません</h1>
+  <p>お探しのページは移動または削除された可能性があります。<a href={routes.home.ja}>トップページ</a>からお探しください。</p>
+  <p lang="en">
+    The page you are looking for could not be found. Please go to the <a href={routes.home.en}>English home page</a>.
+  </p>
+</Base>

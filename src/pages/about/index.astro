@@ -1,0 +1,39 @@
+---
+import Base from '../../layouts/Base.astro';
+import { CONTACT_FORM_URL, jaOnlyRoutes, ui } from '../../i18n';
+---
+
+<Base
+  lang="ja"
+  route="about"
+  title={`法人概要 | ${ui.ja.orgName}`}
+  description="一般社団法人京阪マーケティング・リサーチ機構の法人概要（名称、設立、所在地、代表者、非営利性、公告、お問い合わせ）です。"
+>
+  <h1>法人概要</h1>
+  <p class="lead">{ui.ja.mission}</p>
+
+  <h2>基本情報</h2>
+  <dl class="facts">
+    <dt>名称</dt>
+    <dd>{ui.ja.orgName}</dd>
+    <dt>英語名称</dt>
+    <dd lang="en">{ui.en.orgName}（KMA）</dd>
+    <dt>設立</dt>
+    <dd>2022年1月31日</dd>
+    <dt>所在地</dt>
+    <dd>京都市下京区西七条西久保町44番地3</dd>
+    <dt>代表者</dt>
+    <dd>代表理事 桐野 裕之</dd>
+  </dl>
+
+  <h2>非営利性</h2>
+  <p>当法人は、剰余金を社員に分配しません。また、解散したときの残余財産は、公益法人等に帰属させます。</p>
+
+  <h2>公告</h2>
+  <p>
+    一般社団法人及び一般財団法人に関する法律で求められる公告事項は、<a href={jaOnlyRoutes.koukoku}>公告ページ</a>をご確認ください。
+  </p>
+
+  <h2>お問い合わせ</h2>
+  <p>お問い合わせは、<a href={CONTACT_FORM_URL} rel="noopener">お問い合わせフォーム（Google Form）</a>からお寄せください。</p>
+</Base>

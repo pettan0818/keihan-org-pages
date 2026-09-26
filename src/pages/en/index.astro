@@ -1,0 +1,48 @@
+---
+import Base from '../../layouts/Base.astro';
+import PaperList from '../../components/PaperList.astro';
+import NewsList from '../../components/NewsList.astro';
+import OrgJsonLd from '../../components/OrgJsonLd.astro';
+import { getNews, getPapers } from '../../lib/content';
+import { routes, ui } from '../../i18n';
+
+const papers = (await getPapers()).slice(0, 3);
+const news = await getNews();
+---
+
+<Base
+  lang="en"
+  route="home"
+  title="Keihan Marketing Research Association (KMA)"
+  description="Keihan Marketing Research Association (KMA) — an independent, not-for-profit research institute publishing open-access research on markets, consumers, and public policy."
+>
+  <OrgJsonLd slot="head" lang="en" />
+  <section class="hero">
+    <p class="eyebrow" lang="ja">{ui.ja.orgName}</p>
+    <h1>Keihan Marketing Research Association</h1>
+    <p class="lead">{ui.en.mission}</p>
+  </section>
+
+  <section aria-labelledby="latest-research">
+    <h2 id="latest-research">Latest research</h2>
+    <PaperList papers={papers} lang="en" compact />
+    <p class="section-more"><a href={routes.research.en}>All research</a></p>
+  </section>
+
+  <section aria-labelledby="news">
+    <h2 id="news">News</h2>
+    <NewsList items={news} lang="en" />
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding: 0.5rem 0 0.5rem;
+  }
+
+  .eyebrow {
+    color: var(--ink-muted);
+    font-size: 0.875rem;
+    margin-bottom: 0.4rem;
+  }
+</style>

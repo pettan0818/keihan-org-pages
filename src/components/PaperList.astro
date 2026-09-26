@@ -1,0 +1,156 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Lang } from '../i18n';
+import { doiUrl } from '../lib/content';
+
+interface Props {
+  papers: CollectionEntry<'research'>[];
+  lang: Lang;
+  headingLevel?: 'h2' | 'h3';
+  /** Compact: title + one-line citation + DOI (used on the top page). */
+  compact?: boolean;
+}
+
+const { papers, lang, headingLevel = 'h3', compact = false } = Astro.props;
+const Heading = headingLevel;
+const labels =
+  lang === 'ja'
+    ? { authors: '著者', year: '発表年', journal: '掲載誌', volume: '巻号・頁', doi: 'DOI', type: '査読区分' }
+    : { authors: 'Authors', year: 'Year', journal: 'Journal', volume: 'Volume & pages', doi: 'DOI', type: 'Review' };
+---
+
+<ol class="papers">
+  {
+    papers.map(({ data: p }) => (
+      <li class="paper">
+        <article>
+          <Heading class="paper-title">{lang === 'ja' ? p.title_ja : p.title_en}</Heading>
+          {lang === 'ja' ? (
+            <p class="paper-title-alt" lang="en">{p.title_en}</p>
+          ) : (
+            <p class="paper-title-alt">
+              Original title: <span lang="ja">{p.title_ja}</span>
+            </p>
+          )}
+          {compact ? (
+            <p class="paper-cite">
+              {lang === 'ja' ? (
+                <>
+                  {p.authors_ja}（{p.year}）{p.journal_ja}, {p.volume}, <span class="nowrap">pp. {p.pages}</span>. {p.type_ja}.
+                </>
+              ) : (
+                <>
+                  {p.authors_en} ({p.year}). <cite>{p.journal_en}</cite>, {p.volume}, <span class="nowrap">pp. {p.pages}</span>. {p.type_en}.
+                </>
+              )}
+              <br />
+              DOI: <a href={doiUrl(p.doi)}>{doiUrl(p.doi)}</a>
+            </p>
+          ) : (
+          <dl class="paper-facts">
+            <dt>{labels.authors}</dt>
+            <dd>{lang === 'ja' ? `${p.authors_ja}（${p.authors_en}）` : p.authors_en}</dd>
+            <dt>{labels.year}</dt>
+            <dd>{p.year}</dd>
+            <dt>{labels.journal}</dt>
+            <dd>
+              {lang === 'ja' ? (
+                <>
+                  {p.journal_ja}（<span lang="en">{p.journal_en}</span>）
+                </>
+              ) : (
+                <>
+                  <cite>{p.journal_en}</cite> (<span lang="ja">{p.journal_ja}</span>)
+                </>
+              )}
+            </dd>
+            <dt>{labels.volume}</dt>
+            <dd>
+              {p.volume}, <span class="nowrap">pp. {p.pages}</span>
+            </dd>
+            <dt>{labels.type}</dt>
+            <dd>{lang === 'ja' ? p.type_ja : p.type_en}</dd>
+            <dt>{labels.doi}</dt>
+            <dd>
+              <a href={doiUrl(p.doi)}>{doiUrl(p.doi)}</a>
+            </dd>
+          </dl>
+          )}
+        </article>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .papers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .paper {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .paper:first-child {
+    padding-top: 0.5rem;
+  }
+
+  .paper-title {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0 0 0.35rem;
+  }
+
+  .paper-title-alt {
+    color: var(--ink-muted);
+    font-size: 0.925rem;
+    line-height: 1.6;
+    margin-bottom: 0.9rem;
+  }
+
+  .paper-facts {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.2rem 1.25rem;
+    margin: 0;
+    font-size: 0.925rem;
+    line-height: 1.7;
+  }
+
+  .paper-facts dt {
+    color: var(--ink-muted);
+  }
+
+  .paper-facts dd {
+    margin: 0;
+    min-width: 0;
+  }
+
+  .paper-cite {
+    font-size: 0.925rem;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .nowrap {
+    white-space: nowrap;
+  }
+
+  cite {
+    font-style: italic;
+  }
+
+  @media (max-width: 30rem) {
+    .paper-facts {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .paper-facts dd {
+      margin-bottom: 0.4rem;
+    }
+  }
+</style>

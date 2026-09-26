@@ -1,0 +1,29 @@
+---
+import { SITE_URL, ui, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ResearchOrganization',
+  '@id': `${SITE_URL}/#organization`,
+  name: lang === 'ja' ? ui.ja.orgName : ui.en.orgName,
+  alternateName: lang === 'ja' ? [ui.en.orgName, 'KMA'] : [ui.ja.orgName, 'KMA'],
+  url: `${SITE_URL}/`,
+  logo: `${SITE_URL}/android-chrome-512x512.png`,
+  foundingDate: '2022-01-31',
+  foundingLocation: { '@type': 'Place', name: 'Kyoto, Japan' },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '西七条西久保町44番地3',
+    addressLocality: '京都市下京区',
+    addressRegion: '京都府',
+    addressCountry: 'JP',
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

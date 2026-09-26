@@ -1,0 +1,255 @@
+:root {
+  --bg: #ffffff;
+  --bg-subtle: #f6f7f9;
+  --ink: #1b1f27;
+  --ink-muted: #596070;
+  --rule: #dfe2e8;
+  --accent: #1d3b6a;
+  --accent-ink: #ffffff;
+  --link: #1d4f91;
+  /* Header band: the KMA logo has white lettering, drawn for the old site's #141821 background. */
+  --header-bg: #141821;
+  --header-ink: #e6e8ec;
+  --header-link: #a9c4f2;
+  --measure: 46rem;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN',
+    'Yu Gothic UI', 'Yu Gothic', Meiryo, 'Noto Sans JP', sans-serif;
+  --font-serif: 'Hiragino Mincho ProN', 'Yu Mincho', YuMincho, 'Noto Serif JP', Georgia, 'Times New Roman',
+    serif;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14171d;
+    --bg-subtle: #1c2029;
+    --ink: #e6e8ec;
+    --ink-muted: #a3a9b6;
+    --rule: #323846;
+    --accent: #9fb9e6;
+    --accent-ink: #14171d;
+    --link: #a9c4f2;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+
+:lang(en) {
+  line-height: 1.65;
+}
+
+a {
+  color: var(--link);
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  margin: 0 0 1.25rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+  margin: 3rem 0 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+h3 {
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+.container {
+  width: 100%;
+  max-width: calc(var(--measure) + 2rem);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+main.container {
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  background: var(--bg);
+  padding: 0.5rem 0.75rem;
+  z-index: 10;
+}
+
+/* Header */
+.site-header {
+  background: var(--header-bg);
+  color: var(--header-ink);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+}
+
+.logo-link {
+  display: block;
+  min-width: 0;
+}
+
+.logo {
+  display: block;
+  width: 18rem;
+  max-width: 100%;
+  height: auto;
+}
+
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.95rem;
+}
+
+.site-nav a {
+  color: var(--header-ink);
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current='page'] {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.site-header :focus-visible {
+  outline-color: var(--header-link);
+}
+
+.lang-switch a {
+  color: var(--header-link);
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--rule);
+  background: var(--bg-subtle);
+  color: var(--ink-muted);
+  font-size: 0.875rem;
+}
+
+.footer-inner {
+  padding-top: 1.75rem;
+  padding-bottom: 2rem;
+}
+
+.footer-org {
+  color: var(--ink);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  list-style: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+}
+
+.copyright {
+  margin: 0;
+}
+
+/* Shared content blocks */
+.lead {
+  font-size: 1.075rem;
+}
+
+.muted {
+  color: var(--ink-muted);
+}
+
+.section-more {
+  margin-top: 1rem;
+}
+
+dl.facts {
+  display: grid;
+  grid-template-columns: minmax(6.5rem, max-content) 1fr;
+  gap: 0.6rem 1.5rem;
+  margin: 0;
+}
+
+dl.facts dt {
+  font-weight: 700;
+  color: var(--ink-muted);
+}
+
+dl.facts dd {
+  margin: 0;
+}
+
+@media (max-width: 34rem) {
+  dl.facts {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+
+  dl.facts dd {
+    margin-bottom: 0.75rem;
+  }
+}

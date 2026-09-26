@@ -1,0 +1,13 @@
+{
+  "name": "一般社団法人京阪マーケティング・リサーチ機構",
+  "short_name": "KMA",
+  "description": "Keihan Marketing Research Association (KMA)",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#141821",
+  "theme_color": "#141821",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

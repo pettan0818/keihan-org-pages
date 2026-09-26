@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import PaperList from '../components/PaperList.astro';
+import NewsList from '../components/NewsList.astro';
+import OrgJsonLd from '../components/OrgJsonLd.astro';
+import { getNews, getPapers } from '../lib/content';
+import { routes, ui } from '../i18n';
+
+const papers = (await getPapers()).slice(0, 3);
+const news = await getNews();
+---
+
+<Base
+  lang="ja"
+  route="home"
+  title={`${ui.ja.orgName}（KMA）`}
+  description="一般社団法人京阪マーケティング・リサーチ機構（KMA）は、京都の独立の非営利研究機関です。市場・消費者・公共政策に関する査読付き研究を、誰もが無料で読める形で公開しています。"
+>
+  <OrgJsonLd slot="head" lang="ja" />
+  <section class="hero">
+    <p class="eyebrow" lang="en">Keihan Marketing Research Association (KMA)</p>
+    <h1>{ui.ja.orgName}</h1>
+    <p class="lead">{ui.ja.mission}</p>
+  </section>
+
+  <section aria-labelledby="latest-research">
+    <h2 id="latest-research">最新の研究成果</h2>
+    <PaperList papers={papers} lang="ja" compact />
+    <p class="section-more"><a href={routes.research.ja}>研究成果の一覧へ</a></p>
+  </section>
+
+  <section aria-labelledby="news">
+    <h2 id="news">News</h2>
+    <NewsList items={news} lang="ja" />
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding: 0.5rem 0 0.5rem;
+  }
+
+  .eyebrow {
+    color: var(--ink-muted);
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.4rem;
+  }
+</style>

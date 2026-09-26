@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Lang } from '../i18n';
+import { formatDate } from '../lib/content';
+
+interface Props {
+  items: CollectionEntry<'news'>[];
+  lang: Lang;
+}
+
+const { items, lang } = Astro.props;
+---
+
+<ul class="news">
+  {
+    items.map(({ data: n }) => {
+      const title = lang === 'ja' ? n.title_ja : n.title_en;
+      return (
+        <li>
+          <time datetime={n.date.toISOString().slice(0, 10)}>{formatDate(n.date, lang)}</time>
+          <span>{n.url ? <a href={n.url}>{title}</a> : title}</span>
+        </li>
+      );
+    })
+  }
+</ul>
+
+<style>
+  .news {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .news li {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 0.25rem 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .news time {
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 30rem) {
+    .news li {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,49 @@
+# 研究成果（論文）の一覧。論文を追加するときはこのファイルに1件追記するだけでよい。
+# - id: 重複しない英数字の識別子（URL には出ない）
+# - 表示順: date（掲載日、J-STAGE の公開日など）の新しい順。トップには新しい3件が出る。
+# - doi: "10.xxxx/..." の形で書く（https://doi.org/ は付けない）
+
+- id: kirino-2023-apdmj-20-1
+  authors_ja: 桐野 裕之
+  authors_en: Kirino, H.
+  year: 2023
+  date: 2023-09-30
+  title_ja: 規制緩和期の軽油価格に関する考察―ガソリンと軽油の流通特性の比較を通して―
+  title_en: "Consideration on Diesel Prices during the Deregulation Period: Through Comparison of Distribution Characteristics of Gasoline and Diesel"
+  journal_ja: 商品開発・管理研究
+  journal_en: Journal of Product Development and Management
+  volume: "20(1)"
+  pages: "5–20"
+  doi: 10.57471/apdmj.20.1_5
+  type_ja: 査読付き研究ノート
+  type_en: Peer-reviewed research note
+
+- id: kirino-2023-jpi-66-4
+  authors_ja: 桐野 裕之
+  authors_en: Kirino, H.
+  year: 2023
+  date: 2023-07-01
+  title_ja: 規制緩和後のガソリンスタンド数の減少とその要因―閉鎖数・新規参入数および閉鎖要因の変化に焦点を当てて―
+  title_en: "The Decrease in the Number of Service Stations after Deregulation and Its Factors: Focusing on the Number of Closures, Number of New Entries, and Changes in Closure Factors"
+  journal_ja: 石油学会誌
+  journal_en: Journal of the Japan Petroleum Institute
+  volume: "66(4)"
+  pages: "109–114"
+  doi: 10.1627/jpi.66.109
+  type_ja: 査読付き論文
+  type_en: Peer-reviewed paper
+
+- id: kirino-2022-apdmj-19-1
+  authors_ja: 桐野 裕之
+  authors_en: Kirino, H.
+  year: 2022
+  date: 2022-12-15
+  title_ja: 時代の流れとモノの需要に関する一考察―ガソリン需要の増減要因に焦点を当てて―
+  title_en: "A Study on the Demand for Goods Due to the Flow of the Times: Focusing on Factors that Increase or Decrease in Gasoline Demand"
+  journal_ja: 商品開発・管理研究
+  journal_en: Journal of Product Development and Management
+  volume: "19(1)"
+  pages: "2–17"
+  doi: 10.57471/apdmj.19.1_2
+  type_ja: 査読付き研究ノート
+  type_en: Peer-reviewed research note

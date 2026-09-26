@@ -1,0 +1,21 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PaperList from '../../../components/PaperList.astro';
+import { getPapers } from '../../../lib/content';
+
+const papers = await getPapers();
+---
+
+<Base
+  lang="en"
+  route="research"
+  title="Research | Keihan Marketing Research Association (KMA)"
+  description="Peer-reviewed papers and research notes supported by Keihan Marketing Research Association (KMA), with journal, volume, pages and DOI."
+>
+  <h1>Research</h1>
+  <p class="lead">
+    Peer-reviewed papers and research notes by researchers supported by KMA. Each entry links to the published article
+    through its DOI.
+  </p>
+  <PaperList papers={papers} lang="en" />
+</Base>
