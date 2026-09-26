@@ -1,0 +1,41 @@
+export type Lang = 'ja' | 'en';
+
+export const SITE_URL = 'https://www.keihan.or.jp';
+
+export const CONTACT_FORM_URL =
+  'https://docs.google.com/forms/u/0/d/1EcS0OrBsZN5npQMRr1ISticDPaGE8p1rsL5UsOxrFws/edit?hl=JA';
+
+/** Page paths per language. Every entry here is a ja/en pair linked by hreflang. */
+export const routes = {
+  home: { ja: '/', en: '/en/' },
+  research: { ja: '/research/', en: '/en/research/' },
+  about: { ja: '/about/', en: '/en/about/' },
+} as const;
+
+export type RouteKey = keyof typeof routes;
+
+/** Japanese-only pages (no English counterpart, no hreflang pair). */
+export const jaOnlyRoutes = {
+  koukoku: '/koukoku/',
+} as const;
+
+export const ui = {
+  ja: {
+    orgName: '一般社団法人京阪マーケティング・リサーチ機構',
+    orgShortName: '京阪マーケティング・リサーチ機構',
+    nav: { home: 'トップ', research: '研究成果', about: '法人概要' },
+    langSwitch: 'English',
+    koukoku: '公告',
+    contact: 'お問い合わせ',
+    skipToContent: '本文へ移動',
+  },
+  en: {
+    orgName: 'Keihan Marketing Research Association',
+    orgShortName: 'Keihan Marketing Research Association',
+    nav: { home: 'Home', research: 'Research', about: 'About' },
+    langSwitch: '日本語',
+    koukoku: 'Public notices (Japanese)',
+    contact: 'Contact',
+    skipToContent: 'Skip to content',
+  },
+} as const;
