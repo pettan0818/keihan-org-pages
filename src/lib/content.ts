@@ -1,9 +1,9 @@
 import { getCollection } from 'astro:content';
 
-/** Papers, newest year first; within a year, file order is kept (Array#sort is stable). */
+/** Papers, newest publication date first. */
 export async function getPapers() {
   const papers = await getCollection('research');
-  return papers.sort((a, b) => b.data.year - a.data.year);
+  return papers.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 }
 
 export async function getNews() {

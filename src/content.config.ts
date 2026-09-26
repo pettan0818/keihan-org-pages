@@ -8,6 +8,8 @@ const research = defineCollection({
     authors_ja: z.string(),
     authors_en: z.string(),
     year: z.number().int(),
+    /** Publication date; used only for ordering. */
+    date: z.coerce.date(),
     title_ja: z.string(),
     title_en: z.string(),
     journal_ja: z.string(),
