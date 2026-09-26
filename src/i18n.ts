@@ -2,8 +2,9 @@ export type Lang = 'ja' | 'en';
 
 export const SITE_URL = 'https://www.keihan.or.jp';
 
+// Same form the old site linked to (via its /edit URL); /viewform is the public answer page.
 export const CONTACT_FORM_URL =
-  'https://docs.google.com/forms/u/0/d/1EcS0OrBsZN5npQMRr1ISticDPaGE8p1rsL5UsOxrFws/edit?hl=JA';
+  'https://docs.google.com/forms/d/1EcS0OrBsZN5npQMRr1ISticDPaGE8p1rsL5UsOxrFws/viewform';
 
 /** Page paths per language. Every entry here is a ja/en pair linked by hreflang. */
 export const routes = {
