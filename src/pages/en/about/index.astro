@@ -1,0 +1,45 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { CONTACT_FORM_URL, jaOnlyRoutes, ui } from '../../../i18n';
+---
+
+<Base
+  lang="en"
+  route="about"
+  title="About | Keihan Marketing Research Association (KMA)"
+  description="About Keihan Marketing Research Association (KMA): legal status, date of establishment, address, representative, non-profit policy and contact."
+>
+  <h1>About KMA</h1>
+  <p class="lead">{ui.en.mission}</p>
+
+  <h2>Organization</h2>
+  <dl class="facts">
+    <dt>Name</dt>
+    <dd>{ui.en.orgName} (KMA)</dd>
+    <dt>Japanese name</dt>
+    <dd lang="ja">{ui.ja.orgName}</dd>
+    <dt>Legal status</dt>
+    <dd>General incorporated association (<i>ippan shadan hōjin</i>) under Japanese law</dd>
+    <dt>Established</dt>
+    <dd>January 31, 2022</dd>
+    <dt>Address</dt>
+    <dd>44-3 Nishishichijo Nishikubo-cho, Shimogyo-ku, Kyoto, Japan</dd>
+    <dt>Representative</dt>
+    <dd>Hiroyuki Kirino, Representative Director</dd>
+  </dl>
+
+  <h2>Not-for-profit status</h2>
+  <p>
+    KMA does not distribute surplus to its members. Upon dissolution, any remaining assets are to be transferred to
+    public-interest corporations or similar bodies.
+  </p>
+
+  <h2>Public notices</h2>
+  <p>
+    Public notices required under Japanese law are published in Japanese on the
+    <a href={jaOnlyRoutes.koukoku} lang="ja" hreflang="ja">public notice page (公告)</a>.
+  </p>
+
+  <h2>Contact</h2>
+  <p>Please send inquiries through our <a href={CONTACT_FORM_URL} rel="noopener">contact form (Google Form)</a>.</p>
+</Base>

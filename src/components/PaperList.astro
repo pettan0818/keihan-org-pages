@@ -7,9 +7,11 @@ interface Props {
   papers: CollectionEntry<'research'>[];
   lang: Lang;
   headingLevel?: 'h2' | 'h3';
+  /** Compact: title + one-line citation + DOI (used on the top page). */
+  compact?: boolean;
 }
 
-const { papers, lang, headingLevel = 'h3' } = Astro.props;
+const { papers, lang, headingLevel = 'h3', compact = false } = Astro.props;
 const Heading = headingLevel;
 const labels =
   lang === 'ja'
@@ -30,6 +32,21 @@ const labels =
               Original title: <span lang="ja">{p.title_ja}</span>
             </p>
           )}
+          {compact ? (
+            <p class="paper-cite">
+              {lang === 'ja' ? (
+                <>
+                  {p.authors_ja}（{p.year}）{p.journal_ja}, {p.volume}, pp. {p.pages}. {p.type_ja}.
+                </>
+              ) : (
+                <>
+                  {p.authors_en} ({p.year}). <cite>{p.journal_en}</cite>, {p.volume}, pp. {p.pages}. {p.type_en}.
+                </>
+              )}
+              <br />
+              DOI: <a href={doiUrl(p.doi)}>{doiUrl(p.doi)}</a>
+            </p>
+          ) : (
           <dl class="paper-facts">
             <dt>{labels.authors}</dt>
             <dd>{lang === 'ja' ? `${p.authors_ja}（${p.authors_en}）` : p.authors_en}</dd>
@@ -58,6 +75,7 @@ const labels =
               <a href={doiUrl(p.doi)}>{doiUrl(p.doi)}</a>
             </dd>
           </dl>
+          )}
         </article>
       </li>
     ))
@@ -109,6 +127,12 @@ const labels =
   .paper-facts dd {
     margin: 0;
     min-width: 0;
+  }
+
+  .paper-cite {
+    font-size: 0.925rem;
+    line-height: 1.7;
+    margin: 0;
   }
 
   cite {
