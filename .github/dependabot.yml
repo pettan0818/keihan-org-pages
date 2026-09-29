@@ -1,4 +1,4 @@
-# Dependency update PRs. Every PR runs build + npm run verify (deploy.yml);
+# Dependency update PRs. Every PR runs build + npm run verify (ci.yml);
 # merge once CI is green. Minor/patch updates are grouped into one PR per ecosystem.
 version: 2
 updates:
