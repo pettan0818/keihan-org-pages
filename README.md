@@ -1,20 +1,20 @@
 # www.keihan.or.jp
 
-一般社団法人京阪マーケティング・リサーチ機構（KMA）の公式サイトです。Astro で静的 HTML を生成し、GitHub Pages で配信します。
+一般社団法人京阪マーケティング・リサーチ機構（KMA）の公式サイトです。Astro で静的 HTML を生成し、Cloudflare Pages で配信します。
 
 - 日本語は `/`、英語は `/en/` 配下に置き、各ページに `hreflang` の相互リンクがあります。
 - クライアント JS は使いません（例外は公告ページの日付表示のみ）。JS を実行しないクローラーからも全文が読めます。
 
 ## 論文・News の追加
 
-どちらもデータファイル 1 つを編集するだけで済みます。main に push すると自動でデプロイされます。
+どちらもデータファイル 1 つを編集するだけで済みます。main に反映したあと `npm run deploy` を実行すると公開されます（[デプロイ](#デプロイ)）。
 
 | 追加するもの | 編集するファイル | 表示先 |
 |---|---|---|
 | 論文 | `src/content/research.yaml` | トップ（新しい 3 件）、`/research/`、`/en/research/` |
 | News | `src/content/news.yaml` | トップ（日英） |
 
-書き方はファイル冒頭のコメントと既存の項目を参照してください。論文は `date`（掲載日）の新しい順、News は `date` の新しい順に並びます。項目が足りない・形式が違う場合はビルドがエラーで止まり、デプロイされません。
+書き方はファイル冒頭のコメントと既存の項目を参照してください。論文は `date`（掲載日）の新しい順、News は `date` の新しい順に並びます。項目が足りない・形式が違う・YAML の書き方が壊れている場合はビルドがエラーで止まり、公開されません。
 
 ## ページ構成
 
@@ -32,7 +32,7 @@
 ## 変えてはいけないもの
 
 - **公告ページの URL `/koukoku/`**。電子公告の URL は登記事項の可能性があるため、パスを変えないでください。
-- **`public/CNAME`**（`www.keihan.or.jp`）と DNS。`keihan.or.jp` ではメールを運用しているため、DNS レコード（特に MX）には触れないでください。
+- **DNS のメール関連レコード**。`keihan.or.jp` ではメールを運用しているため、Cloudflare DNS の MX・TXT（SPF/DKIM/DMARC/所有確認）・`office.*` には触れないでください。Search Console の所有確認もこの TXT レコードに依存しています。
 - **旧サイトから引き継いだ静的ファイルのパス**（`public/` 直下の favicon・画像類、`public/ARCHIVE/`、`public/404/index.html` のリダイレクト）。
 
 ## 開発
@@ -46,6 +46,7 @@ npm run build     # dist/ に静的サイトを生成
 npm run verify    # dist/ に対して受け入れ条件を検査
 npm run verify -- https://www.keihan.or.jp   # 本番を JS 非実行で検査
 npm run images    # ロゴから OGP 画像とタッチアイコンを再生成（法人名を変えたとき）
+npm run deploy    # ビルド・検査して Cloudflare Pages に公開し、本番を検査
 ```
 
 `npm run verify` では次の項目を検査します。
@@ -58,9 +59,40 @@ npm run images    # ロゴから OGP 画像とタッチアイコンを再生成�
 
 ## デプロイ
 
-`.github/workflows/deploy.yml` が main への push で `withastro/action` によりビルドし、`npm run verify` を通過したものだけを GitHub Pages にデプロイします。プルリクエストでもビルドと検査だけが走ります。
+サイトは Cloudflare Pages のプロジェクト `keihan-or-jp` に、GitHub と連携せず Direct Upload で公開しています。main への push だけでは公開されません。
 
-リポジトリ設定の **Settings → Pages → Build and deployment → Source** は「GitHub Actions」にしておく必要があります。
+```bash
+git switch main
+git pull
+npm run deploy
+```
+
+`npm run deploy`（`scripts/deploy.mjs`）は次の順に実行します。
+
+1. main がクリーンで `origin/main` と一致しているか確かめる（違えば中止）
+2. `npm run build` と `npm run verify`
+3. `wrangler pages deploy dist` で本番に公開
+4. `npm run verify -- https://www.keihan.or.jp` で本番を検査
+
+### Cloudflare の構成
+
+| 項目 | 内容 |
+|---|---|
+| アカウント | `Adachi.masaki@keihan.or.jp's Account`（ID `6bd594a46ebd21fc2ce87924ab107aa3`）。keihan.or.jp の DNS も同じアカウント |
+| Pages プロジェクト | `keihan-or-jp`（`https://keihan-or-jp.pages.dev`）。カスタムドメインは `www.keihan.or.jp` と `keihan.or.jp` |
+| リダイレクト | Rules → Redirect Rules「Redirect keihan.or.jp to www (301)」。`keihan.or.jp` を `https://www.keihan.or.jp` にパスとクエリを保ったまま 301 転送する。証明書の HTTP 検証のため `/.well-known/` は転送対象から外している（外すと apex の証明書が更新できなくなる） |
+
+### wrangler のログイン
+
+`scripts/deploy.mjs` は、wrangler の認証情報を `%APPDATA%\wrangler-kma` に保存する前提で動きます（`XDG_CONFIG_HOME` で切り替えるので、同じ PC の別の Cloudflare ログインと混ざりません）。初回または期限切れのときは、次のコマンドでログインします。承認画面では「Adachi.masaki@keihan.or.jp's Account」にチェックを入れてください。
+
+```powershell
+$env:XDG_CONFIG_HOME = "$env:APPDATA\wrangler-kma"; npx wrangler login
+```
+
+### CI
+
+`.github/workflows/ci.yml` が main への push とプルリクエストでビルドと `npm run verify` を実行します。公開はしません。
 
 ### 依存関係の更新
 
@@ -69,5 +101,6 @@ Dependabot（`.github/dependabot.yml`）が、月に 1 回、Astro などの npm
 ## 旧サイトからの移行メモ
 
 - 旧サイトは Gatsby（LekoArts cara テーマ）で、ソースは `pettan0818/keihan-org-LP`、ビルド成果物をこのリポジトリの main に直接 push していました。
+- 2026-09-26〜29 は GitHub Pages（GitHub Actions でデプロイ）で配信し、2026-09-29 に DNS を Cloudflare へ移して Cloudflare Pages に切り替えました。
 - ハッシュ付き JS チャンク、`page-data/*.json` などの Gatsby 内部ファイルは移行していません。
 - `banner.jpg`、`apple-touch-icon*.png`、`android-chrome-*.png` はテーマのサンプル画像だったため、同じパスのまま KMA のロゴ（`logo_original.png`）から作り直しました。ロゴの文字は白で暗い背景用のため、ヘッダーは旧サイトの背景色 `#141821` の帯にしています。
